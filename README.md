@@ -19,7 +19,7 @@
 
 ## Video
 
-https://user-images.githubusercontent.com/93625431/236649641-1f80a3db-9988-439d-8428-359fceb663dd.mp4
+https://user-images.githubusercontent.com/93625431/236650045-99e90990-e39e-4267-b1bf-9057a2d2e876.mp4
 
 ## Installation
 
