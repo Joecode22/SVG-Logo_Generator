@@ -70,7 +70,7 @@ inquirer
         console.log('The circle logo string is: ', logoStr);
     }
 
-    fs.writeFile('logo.svg', logoStr, (err) => {
+    fs.writeFile('./examples/logo.svg', logoStr, (err) => {
       if (err){
         console.log('we got an error!', err)
       } else {
