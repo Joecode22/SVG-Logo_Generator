@@ -31,7 +31,12 @@ npm i
 
 ## Usage
 
-It uses inquirer@8.2.4 for user prompts and Jest for testing 
+It uses inquirer@8.2.4 for user prompts and Jest for testing
+The app can be launched using the following command:
+
+```bash
+node index.js
+```
 
 ## License
 
