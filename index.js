@@ -1,12 +1,13 @@
 //Require the inquirer package
-const inquirer = import('inquirer');
+const inquirer = require('inquirer');
 //Require fs
 const fs = require('fs');
 //Require our classes from shapes.js
 const { Circle, Square, Triangle } = require("./lib/shapes.js");
 
 //Use Inquirer to prompt the user to provide the following information:
-inquirer.prompt([
+inquirer
+  .prompt([
     // WHEN I am prompted for text THEN I can enter up to three characters
     {
       type: 'input',
@@ -50,20 +51,35 @@ inquirer.prompt([
         return true;
       }
     },
-])
-//This code is from the inquirer documentation page: https://www.npmjs.com/package/inquirer
-.then((answers) => {
-  console.log(answers.text, answers.textColor, answers,shape , answers.shapeColor);
-})
-.catch((error) => {
-  if (error.isTtyError) {
-    console.log('error in the prompting promise chain');
-  } else {
-    // Something else went wrong
-  }
-});
+  ])
+  //This code is from the inquirer documentation page: https://www.npmjs.com/package/inquirer
+  .then((answers) => {
+    // WHEN I have entered input for all the prompts THEN an SVG file is created named `logo.svg` AND the output text "Generated logo.svg" is printed in the command line
+    let logoStr = '';
+    console.log(answers.text, answers.textColor, answers.shapeColor);
+    if(answers.shape === 'circle'){
+      const circle = new Circle(answers.text, answers.textColor, answers.shapeColor);
+      logoStr = circle.svgString();
+      console.log('The circle logo string is: ', logoStr);
+    } else if(answers.shape === 'square'){
+        const square = new Square(answers.text, answers.textColor, answers.shapeColor);
+        logoStr = square.svgString();
+        console.log('The circle logo string is: ', logoStr);
+    }  else {
+        const triangle = new Triangle(answers.text, answers.textColor, answers.shapeColor);
+        logoStr = triangle.svgString();
+        console.log('The circle logo string is: ', logoStr);
+    }
+  })
 
-// WHEN I have entered input for all the prompts THEN an SVG file is created named `logo.svg` AND the output text "Generated logo.svg" is printed in the command line
+  .catch((error) => {
+    if (error.isTtyError) {
+      console.log('error in the inquirer prompting promise chain');
+    } else {
+      console.log('It not an error object but something is wrong');
+    }
+  });
+
 
 // WHEN I open the `logo.svg` file in a browser THEN I am shown a 300x200 pixel image that matches the criteria I entered
 
