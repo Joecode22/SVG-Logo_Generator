@@ -19,7 +19,7 @@ inquirer
     {
       type: 'input',
       name: 'textColor',
-      message: 'Enter a color code in hexadecimal format i.e. #FFFFFF (white) #000000 (black)',
+      message: 'Enter a text color in hexadecimal format i.e. #FFFFFF (white) #000000 (black)',
       //the following code was created by referencing the inquirer documentation for validate
       validate: (val) => {
         //regex expression checks for hex code (limit digits to 0-9 and letters to a-f 
@@ -41,7 +41,7 @@ inquirer
     {
       type: 'input',
       name: 'shapeColor',
-      message: 'Enter a color code in hexadecimal format i.e. #FFFFFF (white) #000000 (black)',
+      message: 'Enter a shape color in hexadecimal format i.e. #FFFFFF (white) #000000 (black)',
       //the following code was created by referencing the inquirer documentation for validate
       validate: (val) => {
         //regex expression checks for hex code (limit digits to 0-9 and letters to a-f 
@@ -52,7 +52,6 @@ inquirer
       }
     },
   ])
-  //This code is from the inquirer documentation page: https://www.npmjs.com/package/inquirer
   .then((answers) => {
     // WHEN I have entered input for all the prompts THEN an SVG file is created named `logo.svg` AND the output text "Generated logo.svg" is printed in the command line
     let logoStr = '';
@@ -70,13 +69,21 @@ inquirer
         logoStr = triangle.svgString();
         console.log('The circle logo string is: ', logoStr);
     }
-  })
 
+    fs.writeFile('logo.svg', logoStr, (err) => {
+      if (err){
+        console.log('we got an error!', err)
+      } else {
+        console.log('Success! Your logo.svg file has been created!')
+      } 
+    })
+
+  })
   .catch((error) => {
     if (error.isTtyError) {
       console.log('error in the inquirer prompting promise chain');
     } else {
-      console.log('It not an error object but something is wrong');
+      console.log('It is not an error object but something is wrong');
     }
   });
 
